@@ -1,0 +1,107 @@
+\documentclass[10pt,twocolumn]{article} 
+
+\usepackage{oxycomps} % use the main oxycomps style file
+
+\bibliography{references}
+
+\pdfinfo{
+    /Title (Using ML to Detect and Classify Alzheimer's Data)
+    /Author (Maya Gonzalez)
+}
+
+\title{Using ML to Detect and Classify Alzheimer's Data}
+
+\author{Maya Gonzalez}
+\affiliation{Occidental College}
+\email{mgonzalez3@oxy.edu}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\end{abstract}
+\section{The Oxy CS Comps Paper}
+
+\subsection{Goals}
+
+\subsection{Audience}
+
+\subsection{Requirements}
+
+\section{Sections of the Oxy CS Comps Paper}
+
+\subsection{Introduction and Background}
+
+\subsection{Problem Context}
+Alzheimer's disease dramatically effects the individual themselves along with family. There is currently no cure, only measures that can slow the progression. Often times, the main indication is the recognition of memory loss and differences in environment interactions. It is also possible to analyze various brain scans and clinical data to determine the extent of a person's  condition. The current process requires expensive scans, a specialized medical expert to analyze the images and overall takes time. 
+
+Among other factors, Alzheimer's can be characterized by the abnormal accumulation of Tau and Amyloid proteins. These proteins clump to form tangles and plaques, respectively. It is unclear if these are by-products of the disease or if they to some extent influence disease progression. Biomarkers from Cerebral Spinal Fluid (CSF) are another tool to aid in diagnosis of (AD) degenerative dementia. Loss of brain mass is another indication of AD and it is unclear exactly at what stage loss of mass takes place. These questions are out of the scope for this project, but may be critical in understanding if detecting these anatomical changes can prevent early onset Alzheimer's or simply be used to diagnose. These tangles and plaques can be identified through MRI's. 
+
+Researchers have utilized Machine Learning as one method of analyzing brain scans. This has shown promising results in the detection of brain changes that are the result of dementia and the classification of Alzheimer's disease and other brain conditions. Well-documented data sets exist that researchers use to train their models on. 
+
+Magnetic Resonance Imaging (MRI) is a widely used for general medical imaging and is suitable for brain studies scans due to it's noninvasive nature. The clarity and detail of MRI's make them an advantageous tool in early detection and diagnosis of brain related conditions, specifically Alzheimer's. 
+
+I am interested in learning about and gaining more experience with machine learning algorithms. Aside from my Machine Learning course, I do not have experience deciding upon and implementing ML algorithms to solve a real problem. The aspect of deciding on which algorithm and methods to use is something that I would like to focus on. 
+
+\subsection{Technical Background}
+High resolution magnetic resonance brain images contain brain tissue that is not relevant to detection. Pre-processing the scans by removing the extra tissue, a process known as skull stripping, results in better segmentation of brain regions. There are various skull stripping algorithms available \cite{kalavathi2016methods}. Since this is not the main focus of my work, I will utilize an existing pipeline that outputs the standardized and cropped T1-weighted images. There may be additional data pre-processing steps which I cannot anticipate at this time. 
+
+I will be using a widely used data set, Alzheimer's Disease Neuroimaging Initiative (ADNI). Specifically, I will be using the MPRAGE files, which have already been processed with gradwarping, intensity correction, and scaling for gradient descent. Additional demographics and clinical data may be included to increase the performance of classification. 
+
+The process will include importing data, feature extraction and reduction, cross validation, and validation.
+
+As part of the first step, I will randomly divide the data set into a 80/20 testing and evaluation split to avoid a biased assessment.
+
+Zhang et. al \cite{zhang2014classification} published a paper in which they implemented various ML models. Their reasoning for each decision made is well detailed. I propose to follow a similar plan, but anticipate deviations in methodology as I further understand this problem space of ML. 
+
+I would like to develop a convolutional neural network. As my understanding on this subject grows, I may decide to implement changes to features of the architecture to improve the training speed and accuracy. These features likely will be influenced by current research. 
+
+I would be interested in exploring the possibility of testing the built model on other data sets. 
+
+\subsection{Prior Work}
+
+There are various methods to extract valuable information from MRI images. The main methods include voxel-based features, region-of-interest based features, and whole-image-based features. 
+
+The most popular methods utilized in this research area include Singular Value Decomposition (SVD), Principal Component Analysis (PCA), and Convolution Neural Networks (CNN). 
+
+Regardless of the chosen model, researchers experiment with data augmentation, and other methods to reduce overfitting. Data augmentation involves generating reflections and transformations of images. The network then makes a prediction on all these images. Another form of data augmentation is to alter the RGB intensities.  
+
+Similar studies have utilized the OASIS data set. Images are processed to achieve a standardized format through various methods. 
+
+Zhang et. al \cite{zhang2014classification} propose a classification system to distinguish Normal Control (NC), MCI (Mild Cognitive Impairment), and AD (Alzheimer's Disease). They used the OASIS MRI data set and performed SVD-PCA, then k-fold Cross Validation. Training data was classified with a kSVM-DT model. Their system resulted in a final overall accuracy of 80\%.
+
+
+MULTI MODAL
+
+Most existing regression methods only utilize a single modality of data without taking into account related information derived from different modalities. Specifically, most studies solely focus on disease classification or clinical score regression. There have been efforts to address both these tasks in a unified methodology. Such studies have found the features from both tasks are highly related as described in Zhang et. al \cite{zhang2014classification} and Liu et al. \cite{liu2018joint}. 
+
+Another research group \cite{zhang2012multi} proposes a Multi-Modal Multi-Task (M3T) learning methodology which incorporates 1) multi-task feature selection for multiple variables from each modality and 2) multi-modal SVM using the selected features to predict regression and classification variables. Their results show that their M3T method performs better than conventional regression and classification methods. 
+
+Suk et al.\cite{suk2013deep} describes limitations in work that only considers low-level features such as gray matter tissue volumes from MRI data. They build a more robust model based on the assumption that high level information derived from the original features. Deep learning is used for feature representation in brain disease on the ADNI data set by using MRI, PET, and CSF data.
+
+Other work has utilized Convolution Neural Networks with success. 
+
+Liu et al. \cite{liu2018joint} developed a convolutional neural network, DM2L, that incorporates both feature extraction and classification model training. Their joint classification and regression learning framework has an advantage as they incorporated patient's demographic information (age, gender, and education) into the learning process. The DM2L method performs better when compared to similar joint classification approaches. The researchers credit the superior performance to the inclusion of subject's demographic information as well as the simultaneous learning of MRI features along with the classifier and regressor.
+
+Yoon et al.  \cite{yoon2018classification} achieved 98\% overall accuracy by using AlexNet, a Convolution Neural Network architecture, and Mini-batch Stochastic Gradient Descent (MSGD). AlexNet has five convolutional layers and three fully connected layers. The high performance is partially credited to the depth of the model. The researchers also explored data augmentation through rotations, which resulted in further improved accuracy. They concluded that their method was a good model for classifying NC, MCI, and AD in 18F-FBB amyloid PET brain images. 
+
+Krizhevsky et al.\cite{krizhevsky2012imagenet} 
+created a neural network with five convolutional layers and three fully-connected layers. The architecture appears to be similar to AlexNet, with 60 million parameters 650,000 neurons, five convolutional layers, and three fully-connected layers. They found that removing any layers resulted in degraded performance of the model. They implemented non-saturating nonlinearity to reduce the training time required to reach 25\% training error, which was critical to training on a large data set. Other methods such as overlapping pooling reduce the error rates. Despite an expensive cost on big neural networks, They also implemented dropout. Their results broke previous state-of-the-art records in competitions, as they achieved top-1 and top-5 error rates of 37.5\% and 17.0\%, respectively. They concluded with the intention of applying this large and deep CNN on video sequences to learn from more information that isn't as obvious in static images. 
+
+
+\subsection{Methods}
+
+\subsection{Evaluation}
+
+\subsection{Ethical Considerations}
+
+\subsection{Limitations, Future Work, and Conclusion}
+
+\subsection{Appendices}
+
+\section{Conclusion}
+
+\printbibliography 
+
+\end{document}
